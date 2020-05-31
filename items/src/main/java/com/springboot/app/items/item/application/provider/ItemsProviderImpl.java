@@ -1,7 +1,7 @@
-package com.springboot.app.item.item.application.provider;
+package com.springboot.app.items.item.application.provider;
 
-import com.springboot.app.item.item.domain.Item;
-import com.springboot.app.item.product.domain.Product;
+import com.springboot.app.items.item.domain.Item;
+import com.springboot.app.items.domain.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

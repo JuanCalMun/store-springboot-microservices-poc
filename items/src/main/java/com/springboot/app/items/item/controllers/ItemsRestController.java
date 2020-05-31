@@ -1,9 +1,9 @@
-package com.springboot.app.item.item.controllers;
+package com.springboot.app.items.item.controllers;
 
-import com.springboot.app.item.item.application.generator.ItemsGenerator;
-import com.springboot.app.item.item.application.provider.ItemsProvider;
-import com.springboot.app.item.item.domain.Item;
-import com.springboot.app.item.product.domain.Product;
+import com.springboot.app.items.item.application.generator.ItemsGenerator;
+import com.springboot.app.items.item.application.provider.ItemsProvider;
+import com.springboot.app.items.item.domain.Item;
+import com.springboot.app.items.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,6 +1,6 @@
-package com.springboot.app.item.item.domain;
+package com.springboot.app.items.item.domain;
 
-import com.springboot.app.item.product.domain.Product;
+import com.springboot.app.items.domain.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
