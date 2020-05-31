@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.springboot.app</groupId>
-    <artifactId>item</artifactId>
+    <artifactId>items</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>item</name>
-    <description>Microservice for Item</description>
+    <name>items</name>
+    <description>Microservice for Items</description>
 
     <properties>
         <java.version>14</java.version>
