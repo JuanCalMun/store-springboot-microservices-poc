@@ -1,7 +1,7 @@
 package com.springboot.app.items.item.application.provider;
 
 import com.springboot.app.items.item.domain.Item;
-import com.springboot.app.items.domain.Product;
+import com.springboot.app.items.product.domain.Product;
 
 import java.util.List;
 

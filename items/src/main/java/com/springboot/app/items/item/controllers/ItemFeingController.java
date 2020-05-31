@@ -3,53 +3,41 @@ package com.springboot.app.items.item.controllers;
 import com.springboot.app.items.item.application.generator.ItemsGenerator;
 import com.springboot.app.items.item.application.provider.ItemsProvider;
 import com.springboot.app.items.item.domain.Item;
+import com.springboot.app.items.product.controllers.ProductsFeingClient;
 import com.springboot.app.items.product.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
-@RequestMapping("/api")
-public final class ItemsRestController {
-
-    private static final String PRODUCTS_API_URI = "http://localhost:8000";
-    private static final String ALL_PRODUCTS_REQUEST = "/products";
-    private static final String FIND_PRODUCT_BY_ID_REQUEST = "/products/%d";
-
-    private final RestTemplate restTemplate;
+@RequestMapping("/feing")
+public final class ItemFeingController {
 
     private final ItemsGenerator itemsGenerator;
     private final ItemsProvider itemsProvider;
+    private final ProductsFeingClient productsClient;
 
-    public ItemsRestController(@Autowired final ItemsGenerator itemsGenerator,
-                               @Autowired final ItemsProvider itemsProvider) {
+    public ItemFeingController(@Autowired ItemsGenerator itemsGenerator,
+                               @Autowired ItemsProvider itemsProvider,
+                               @Autowired ProductsFeingClient productsClient) {
         this.itemsGenerator = itemsGenerator;
         this.itemsProvider = itemsProvider;
-        this.restTemplate = new RestTemplate();
+        this.productsClient = productsClient;
     }
 
     @GetMapping("/items")
     public List<Item> getAllItems() {
-        final List<Product> products = Arrays.asList(
-                Objects.requireNonNull(restTemplate.getForObject(
-                        PRODUCTS_API_URI + ALL_PRODUCTS_REQUEST,
-                        Product[].class)));
+        final List<Product> products = productsClient.getAllProducts();
         return itemsProvider.retrieveAllItems(products);
     }
 
     @GetMapping("/items/{itemId}/quantity/{itemQuantity}")
     public Item getOneItem(@PathVariable final Integer itemId, @PathVariable final Integer itemQuantity) {
-        final Product product = restTemplate.getForObject(
-                PRODUCTS_API_URI + String.format(FIND_PRODUCT_BY_ID_REQUEST, itemId),
-                Product.class);
+        final Product product = productsClient.getProductBy(itemId);
         return itemsGenerator.generate(product, itemQuantity);
     }
-
 }

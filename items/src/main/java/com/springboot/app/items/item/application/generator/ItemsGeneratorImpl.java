@@ -1,7 +1,7 @@
 package com.springboot.app.items.item.application.generator;
 
 import com.springboot.app.items.item.domain.Item;
-import com.springboot.app.items.domain.Product;
+import com.springboot.app.items.product.domain.Product;
 import org.springframework.stereotype.Service;
 
 @Service
