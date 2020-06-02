@@ -1,21 +1,22 @@
 package com.springboot.app.items.item.application.generator;
 
-import com.springboot.app.items.item.domain.Item;
-import com.springboot.app.items.product.domain.Product;
+import com.springboot.app.items.item.domain.ItemInfoDto;
+import com.springboot.app.items.product.domain.ProductDto;
 import com.springboot.app.items.product.domain.ProductClient;
 import org.springframework.stereotype.Service;
 
 @Service
 public final class ItemGenerator {
 
-    ProductClient productClient;
+    private final ProductClient productClient;
 
-    public ItemGenerator(ProductClient productClient) {
+    public ItemGenerator(final ProductClient productClient) {
         this.productClient = productClient;
     }
 
-    public Item generate(final Integer itemId, final Integer quantity) {
-        Product product = productClient.getOneProduct(itemId);
-        return new Item(product,quantity);
+    public ItemInfoDto generate(final Integer itemId, final Integer quantity) {
+        final ProductDto productDto = this.productClient.getOneProduct(itemId);
+        final Double totalPrice = productDto.getPrice() * quantity;
+        return new ItemInfoDto(productDto, totalPrice, quantity);
     }
 }

@@ -1,4 +1,4 @@
-package com.springboot.app.items.product.domain;
+package com.springboot.app.products.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,12 +10,11 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public final class Product implements Serializable {
+public final class ProductDto implements Serializable {
+    private static final long serialVersionUID = 8361138333439885164L;
 
-    private static final long serialVersionUID = 6605388024083236930L;
-
-    private Long id;
     private String name;
     private Double price;
     private Date createAt;
+    private String serverPort;
 }

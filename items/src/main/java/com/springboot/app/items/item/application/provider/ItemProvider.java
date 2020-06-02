@@ -1,7 +1,7 @@
 package com.springboot.app.items.item.application.provider;
 
-import com.springboot.app.items.item.domain.Item;
-import com.springboot.app.items.product.domain.Product;
+import com.springboot.app.items.item.domain.ItemInfoDto;
+import com.springboot.app.items.product.domain.ProductDto;
 import com.springboot.app.items.product.domain.ProductClient;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +11,19 @@ import java.util.stream.Collectors;
 @Service
 public final class ItemProvider {
 
-    private ProductClient productClient;
+    private final ProductClient productClient;
 
-    public ItemProvider(ProductClient productClient) {
+    public ItemProvider(final ProductClient productClient) {
         this.productClient = productClient;
     }
 
-    public List<Item> listAll() {
+    public List<ItemInfoDto> listAll() {
         final Integer quantity = 1;
-        List<Product> allProducts = productClient.getAllProducts();
-        return allProducts.stream().map(product -> new Item(product, quantity)).collect(Collectors.toList());
+        final List<ProductDto> allProductDtos = this.productClient.getAllProducts();
+        return allProductDtos.stream().map(product ->
+                new ItemInfoDto(product,
+                        product.getPrice() * quantity,
+                        quantity))
+                .collect(Collectors.toList());
     }
 }

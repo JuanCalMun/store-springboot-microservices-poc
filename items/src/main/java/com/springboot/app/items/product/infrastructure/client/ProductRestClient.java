@@ -1,6 +1,6 @@
-package com.springboot.app.items.product.controllers.client;
+package com.springboot.app.items.product.infrastructure.client;
 
-import com.springboot.app.items.product.domain.Product;
+import com.springboot.app.items.product.domain.ProductDto;
 import com.springboot.app.items.product.domain.ProductClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -22,18 +22,18 @@ public final class ProductRestClient implements ProductClient {
     }
 
     @Override
-    public List<Product> getAllProducts() {
+    public List<ProductDto> getAllProducts() {
         return Arrays.asList(
-                Objects.requireNonNull(restTemplate.getForObject(
+                Objects.requireNonNull(this.restTemplate.getForObject(
                         PRODUCTS_API_URI + ALL_PRODUCTS_REQUEST,
-                        Product[].class)));
+                        ProductDto[].class)));
     }
 
     @Override
-    public Product getOneProduct(final Integer productId) {
-        return restTemplate.getForObject(
+    public ProductDto getOneProduct(final Integer productId) {
+        return this.restTemplate.getForObject(
                 PRODUCTS_API_URI + String.format(FIND_PRODUCT_BY_ID_REQUEST, productId),
-                Product.class);
+                ProductDto.class);
     }
 
 }

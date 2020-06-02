@@ -1,20 +1,24 @@
-package com.springboot.app.items.product.controllers.client;
+package com.springboot.app.items.product.infrastructure.client;
 
-import com.springboot.app.items.product.domain.Product;
+import com.springboot.app.items.product.domain.ProductDto;
 import com.springboot.app.items.product.domain.ProductClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
+@Service
 @Primary
-@FeignClient(name = "products-services", url="localhost:8000")
+@FeignClient(name = "products-service")
 public interface ProductFeingClient extends ProductClient {
+        @Override
         @GetMapping("/products")
-        List<Product> getAllProducts();
+        List<ProductDto> getAllProducts();
 
+        @Override
         @GetMapping("/products/{productId}")
-        Product getOneProduct(@PathVariable Integer productId);
+        ProductDto getOneProduct(@PathVariable Integer productId);
 }

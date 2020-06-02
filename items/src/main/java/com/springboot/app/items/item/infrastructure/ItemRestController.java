@@ -1,8 +1,8 @@
-package com.springboot.app.items.item.controllers;
+package com.springboot.app.items.item.infrastructure;
 
 import com.springboot.app.items.item.application.generator.ItemGenerator;
 import com.springboot.app.items.item.application.provider.ItemProvider;
-import com.springboot.app.items.item.domain.Item;
+import com.springboot.app.items.item.domain.ItemInfoDto;
 import com.springboot.app.items.product.domain.ProductClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,19 +19,19 @@ public final class ItemRestController {
     private final ItemGenerator itemGenerator;
     private final ItemProvider itemProvider;
 
-    public ItemRestController(@Autowired ProductClient productClient) {
+    public ItemRestController(@Autowired final ProductClient productClient) {
         this.itemGenerator = new ItemGenerator(productClient);
         this.itemProvider = new ItemProvider(productClient);
     }
 
     @GetMapping("/items")
-    public List<Item> getAllItems() {
-        return itemProvider.listAll();
+    public List<ItemInfoDto> getAllItems() {
+        return this.itemProvider.listAll();
     }
 
     @GetMapping("/items/{itemId}/quantity/{itemQuantity}")
-    public Item getOneItem(@PathVariable final Integer itemId, @PathVariable final Integer itemQuantity) {
-        return itemGenerator.generate(itemId, itemQuantity);
+    public ItemInfoDto getOneItem(@PathVariable final Integer itemId, @PathVariable final Integer itemQuantity) {
+        return this.itemGenerator.generate(itemId, itemQuantity);
     }
 
 }

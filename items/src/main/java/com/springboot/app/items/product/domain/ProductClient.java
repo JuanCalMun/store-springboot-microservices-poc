@@ -3,7 +3,7 @@ package com.springboot.app.items.product.domain;
 import java.util.List;
 
 public interface ProductClient {
-    List<Product> getAllProducts();
+    List<ProductDto> getAllProducts();
 
-    Product getOneProduct(Integer productId);
+    ProductDto getOneProduct(Integer productId);
 }
