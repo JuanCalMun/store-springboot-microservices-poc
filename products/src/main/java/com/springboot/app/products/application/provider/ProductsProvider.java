@@ -17,10 +17,10 @@ public final class ProductsProvider {
         this.productRepository = productRepository;
     }
 
-    public List<ProductDto> retrieveAll(final String localServerPort) {
+    public List<ProductDto> retrieveAll() {
         final List<Product> products = (List<Product>) this.productRepository.findAll();
         return products.stream().map(product -> new ProductDto(product.getName(), product.getPrice(),
-                product.getCreateAt(),localServerPort)).collect(Collectors.toList());
+                product.getCreateAt())).collect(Collectors.toList());
     }
 
 }

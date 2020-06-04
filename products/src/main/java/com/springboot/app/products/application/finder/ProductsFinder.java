@@ -13,12 +13,11 @@ public final class ProductsFinder {
         this.productRepository = productRepository;
     }
 
-    public ProductDto findById(final Long productId, final String localServerPort) {
+    public ProductDto findById(final Long productId) {
         final Product product = this.productRepository.findById(productId).orElse(null);
 
-        return product!=null ?
-                new ProductDto(product.getName(), product.getPrice(), product.getCreateAt(),
-                localServerPort):
-                new ProductDto();
+        return product != null
+                ? new ProductDto(product.getName(), product.getPrice(), product.getCreateAt())
+                : new ProductDto();
     }
 }

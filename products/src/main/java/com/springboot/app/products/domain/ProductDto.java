@@ -16,5 +16,4 @@ public final class ProductDto implements Serializable {
     private String name;
     private Double price;
     private Date createAt;
-    private String serverPort;
 }
